@@ -10,8 +10,10 @@ ham_list = ['meeting', 'tomorrow', 'lunch', 'dinner', 'coffee', 'work', 'project
             'office', 'time', 'date', 'place', 'schedule', 'appointment', 'discussion', 'call', 'email',
             'message', 'phone', 'contact', 'address', 'number', 'home', 'office', 'work', 'week', 'month']
 
+
 def create_email(word_list):
     return ' '.join(random.choices(word_list, k=5))
+
 
 def create_emails(num_emails=5, is_spam=True):
     emails = []
@@ -20,6 +22,7 @@ def create_emails(num_emails=5, is_spam=True):
         emails.append(create_email(word_list))
     return emails
 
+
 def count_words(emails):
     word_counts = {}
     for email in emails:
@@ -27,12 +30,15 @@ def count_words(emails):
             word_counts[word] = word_counts.get(word, 0) + 1
     return word_counts
 
+
 def calculate_word_probabilities(word_counts, total_words):
     return {word: (count / total_words) for word, count in word_counts.items()}
+
 
 def create_random_email(spam_list, ham_list, length=5):
     mixed_list = spam_list + ham_list
     return ' '.join(random.choices(mixed_list, k=length))
+
 
 def classify_email(email, spam_probs, ham_probs):
     words = email.split()
@@ -44,6 +50,7 @@ def classify_email(email, spam_probs, ham_probs):
         ham_log_likelihood += math.log(ham_probs.get(word, 1e-5))
 
     return "Spam" if spam_log_likelihood > ham_log_likelihood else "Ham"
+
 
 # Main script
 if __name__ == '__main__':
